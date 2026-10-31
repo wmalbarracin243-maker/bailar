@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>¿ Vamos  yesterday este finde?</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;background:radial-gradient(circle at 25% 20%,#58288e,transparent 45%),radial-gradient(circle at 80% 85%,#b51c6c,transparent 45%),#100b2b;color:white;font-family:system-ui,-apple-system,sans-serif;overflow:hidden}.card{width:min(92vw,440px);min-height:370px;padding:38px 22px 22px;border:1px solid #ffffff30;border-radius:28px;background:#ffffff14;backdrop-filter:blur(12px);text-align:center;box-shadow:0 20px 70px #0005}h1{font-size:clamp(28px,7vw,42px);margin:12px 0}p{color:#eadcf9}.emoji{font-size:58px}.playground{height:180px;position:relative;margin-top:20px}button{border:0;border-radius:100px;padding:15px 32px;font-size:19px;font-weight:800;cursor:pointer;touch-action:manipulation;box-shadow:0 8px 20px #0003}#yes{position:absolute;left:15%;top:20px;background:#ff4da2;color:white}#no{position:absolute;left:58%;top:20px;background:#eee;color:#35254a;transition:left .14s,top .14s}#result{display:none}#result h2{font-size:30px;color:#ffb7dc}.small{font-size:14px}</style>
+</head><body><main class="card"><div id="question"><div class="emoji">🪩💃🕺</div><h1>¿Vamos a yesterday este finde??</h1><p>Elegí tu respuesta… si podés 😉</p><div class="playground" id="zone"><button id="yes">¡SÍ! ❤️</button><button id="no">No 😢</button></div></div><div id="result"><div class="emoji">🎉🪩❤️</div><h2>¡Sabía que ibas a decir que sí!</h2><p>¡Nos vemos en la previa! 💃🕺</p><button onclick="location.reload()" style="background:#ff4da2;color:white">Otra vez</button></div></main><script>
+const no=document.getElementById('no'),zone=document.getElementById('zone');let last=0;
+function escapeNo(e){if(e)e.preventDefault();const maxX=Math.max(0,zone.clientWidth-no.offsetWidth),maxY=Math.max(0,zone.clientHeight-no.offsetHeight);let x,y;do{x=Math.random()*maxX;y=Math.random()*maxY}while(Math.abs(x-no.offsetLeft)<65&&Math.abs(y-no.offsetTop)<45);no.style.left=x+'px';no.style.top=y+'px';last=Date.now()}
+no.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')escapeNo(e)});no.addEventListener('pointerdown',escapeNo);no.addEventListener('click',escapeNo);
+zone.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||Date.now()-last<160)return;const r=no.getBoundingClientRect();const cx=r.left+r.width/2,cy=r.top+r.height/2;if(Math.hypot(e.clientX-cx,e.clientY-cy)<90)escapeNo()});
+document.getElementById('yes').addEventListener('click',()=>{document.getElementById('question').style.display='none';document.getElementById('result').style.display='block'});
+</script></body></html>
